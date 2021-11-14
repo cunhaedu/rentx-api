@@ -33,6 +33,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
     "typeRoots": [
       "./src/@types",
       "./node_modules/@types"
