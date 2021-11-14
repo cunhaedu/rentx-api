@@ -17,6 +17,13 @@ const errorsHandler = (
 
   console.error(error);
 
+  if (error.name && error.message) {
+    return response.status(500).json({
+      status: 'error',
+      message: error.message,
+    });
+  }
+
   return response.status(500).json({
     status: 'error',
     message: 'Internal Server Error',
