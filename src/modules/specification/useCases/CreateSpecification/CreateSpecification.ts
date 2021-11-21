@@ -1,9 +1,14 @@
-import AppError from '@infra/errors/AppError';
-import { ISpecificationDTO } from '../../dtos/ISpecificationDTO';
-import { ISpecificationRepository } from '../../repositories/ISpecificationRepository';
+import { ISpecificationDTO } from '@modules/specification/dtos/ISpecificationDTO';
+import { ISpecificationRepository } from '@modules/specification/repositories/ISpecificationRepository';
+import AppError from '@shared/errors/AppError';
+import { inject, injectable } from 'tsyringe';
 
+@injectable()
 export class CreateSpecification {
-  constructor(private specificationRepository: ISpecificationRepository) {}
+  constructor(
+    @inject('SpecificationRepository')
+    private specificationRepository: ISpecificationRepository
+  ) {}
 
   async execute(data: ISpecificationDTO): Promise<ISpecificationDTO> {
     const specificationAlreadyExists =

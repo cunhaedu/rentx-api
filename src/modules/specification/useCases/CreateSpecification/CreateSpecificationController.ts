@@ -1,17 +1,20 @@
 import { NextFunction, Request, Response } from 'express';
+import { container } from 'tsyringe';
+
+;import { ISpecificationDTO } from '@modules/specification/dtos/ISpecificationDTO';
 import { CreateSpecification } from './CreateSpecification';
 
 export class CreateSpecificationController {
-  constructor(private createSpecification: CreateSpecification) {}
-
   async handle(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { name, description } = req.body;
 
-      const specification = await this.createSpecification.execute({
+      const createSpecification = container.resolve(CreateSpecification);
+
+      const specification = await createSpecification.execute({
         name,
         description,
-      });
+      } as ISpecificationDTO);
 
       res.status(201).json(specification);
     } catch (error) {

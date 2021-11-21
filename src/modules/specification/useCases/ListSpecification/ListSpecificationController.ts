@@ -1,12 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
+import { container } from 'tsyringe';
+
 import { ListSpecification } from './ListSpecification';
 
 export class ListSpecificationController {
-  constructor(private listSpecification: ListSpecification) {}
-
   async handle(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      res.json(await this.listSpecification.execute());
+      const listSpecification = container.resolve(ListSpecification);
+
+      res.json(await listSpecification.execute());
     } catch (error) {
       next(error);
     }

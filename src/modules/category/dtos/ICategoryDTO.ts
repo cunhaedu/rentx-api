@@ -1,4 +1,4 @@
-import { IDefaultDTO } from '@infra/dtos/IDefaultDTO';
+import { IDefaultDTO } from '@shared/dtos/IDefaultDTO';
 
 export interface ICategoryDTO extends IDefaultDTO {
   name: string;

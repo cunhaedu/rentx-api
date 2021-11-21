@@ -1,9 +1,15 @@
-import AppError from '@infra/errors/AppError';
+import { inject, injectable } from 'tsyringe';
+
 import { ICategoryDTO } from '@modules/category/dtos/ICategoryDTO';
 import { ICategoryRepository } from '@modules/category/repositories/ICategoryRepository';
+import AppError from '@shared/errors/AppError';
 
+@injectable()
 export class CreateCategory {
-  constructor(private categoryRepository: ICategoryRepository) {}
+  constructor(
+    @inject('CategoryRepository')
+    private categoryRepository: ICategoryRepository
+  ) {}
 
   async execute(data: ICategoryDTO): Promise<ICategoryDTO> {
     const categoryAlreadyExists = await this.categoryRepository.findByName(

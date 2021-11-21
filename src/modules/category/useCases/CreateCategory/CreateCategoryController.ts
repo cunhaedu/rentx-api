@@ -1,16 +1,18 @@
 import { NextFunction, Request, Response } from 'express';
+import { container } from 'tsyringe';
+
+import { ICategoryDTO } from '@modules/category/dtos/ICategoryDTO';
 import { CreateCategory } from './CreateCategory';
 
 export class CreateCategoryController {
-  constructor(private createCategory: CreateCategory) {}
-
   async handle(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { name, description } = req.body;
 
-      res
-        .status(201)
-        .json(await this.createCategory.execute({ name, description }));
+      const createCategory = container.resolve(CreateCategory);
+      const category = await createCategory.execute({ name, description } as ICategoryDTO)
+
+      res.status(201).json(category);
     } catch (error) {
       next(error);
     }

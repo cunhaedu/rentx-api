@@ -2,14 +2,15 @@ import fs from 'fs';
 import csvParse from 'csv-parse';
 
 import { ICategoryRepository } from '@modules/category/repositories/ICategoryRepository';
+import { ICategoryDTO } from '@modules/category/dtos/ICategoryDTO';
+import { inject, injectable } from 'tsyringe';
 
-interface IImportCategory {
-  name: string;
-  description: string;
-}
-
+@injectable()
 export class ImportCategory {
-  constructor(private categoryRepository: ICategoryRepository) {}
+  constructor(
+    @inject('CategoryRepository')
+    private categoryRepository: ICategoryRepository
+  ) {}
 
   async execute(file: Express.Multer.File): Promise<void> {
     const categories = await this.loadCategories(file);
@@ -22,15 +23,15 @@ export class ImportCategory {
       );
 
       if (!categoryAlreadyExists) {
-        await this.categoryRepository.save({ name, description });
+        await this.categoryRepository.save({ name, description } as ICategoryDTO);
       }
     });
   }
 
-  async loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
+  async loadCategories(file: Express.Multer.File): Promise<ICategoryDTO[]> {
     return new Promise((resolve, reject) => {
       const stream = fs.createReadStream(file.path);
-      const categories: IImportCategory[] = [];
+      const categories: ICategoryDTO[] = [];
 
       const parseFile = csvParse();
 
@@ -39,7 +40,7 @@ export class ImportCategory {
       parseFile
         .on('data', async line => {
           const [name, description] = line;
-          categories.push({ name, description });
+          categories.push({ name, description } as ICategoryDTO);
         })
         .on('end', () => {
           fs.promises.unlink(file.path);
