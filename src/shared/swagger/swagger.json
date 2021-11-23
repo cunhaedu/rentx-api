@@ -5,8 +5,6 @@
     "description": "Car rental api",
     "version": "1.0.0",
     "contact": {
-      "name": "Eduardo Assunção da Cunha",
-      "url": "https://www.linkedin.com/in/eduassuncao",
       "email": "cunhaeduardo1231@gmail.com"
     }
   },
@@ -14,7 +12,7 @@
     "/categories": {
       "post": {
         "tags": [
-          "Categories"
+          "category"
         ],
         "summary": "Create a category",
         "description": "Create a new category",
@@ -56,7 +54,7 @@
       },
       "get": {
         "tags": [
-          "Categories"
+          "category"
         ],
         "summary": "List all categories",
         "description": "List all categories",
@@ -65,148 +63,21 @@
             "description": "Success",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      }
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
                     }
                   }
                 }
               }
             }
           }
-        }
-      }
-    },
-    "/categories/import": {
-      "post": {
-        "tags": [
-          "Categories"
-        ],
-        "summary": "Upload categories",
-        "description": "Upload new categories from csv file",
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "file": {
-                    "type": "string",
-                    "format": "binary"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "created"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/specifications": {
-      "post": {
-        "tags": [
-          "Specifications"
-        ],
-        "summary": "Create a specification",
-        "description": "Create a new specification",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$red": "#/definitions/Specification",
-                "example": {
-                  "name": "specification name sample",
-                  "description": "specification description sample"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "created"
-          },
-          "422": {
-            "description": "Category already Exists!"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Specifications"
-        ],
-        "summary": "List all specifications",
-        "description": "List all specifications",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "Specification": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      }
-    },
-    "Categories": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
         }
       }
     }
