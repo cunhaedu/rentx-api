@@ -4,19 +4,14 @@
   "main": "index.js",
   "author": "Eduardo Assunção <cunhaeduardo1231@gmail.com>",
   "license": "MIT",
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "scripts": {
     "dev:server": "ts-node-dev -r tsconfig-paths/register --transpile-only --trace-warnings --inspect --ignore-watch node_modules src/shared/infra/http/server.ts",
     "build": "rimraf dist/* && tsc -p tsconfig.json && tscpaths -p tsconfig.json -s . -o ./dist",
     "postbuild": "copyfiles .env.example rbac_model.conf dist/",
+    "prepare": "husky install",
     "start": "node src/shared/infra/http/server.js",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
-  "type": "module",
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
