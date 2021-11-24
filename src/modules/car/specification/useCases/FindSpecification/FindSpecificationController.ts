@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { container } from 'tsyringe';
+
 import { FindSpecification } from './FindSpecification';
 
 export class FindSpecificationController {
@@ -7,7 +8,7 @@ export class FindSpecificationController {
     try {
       const { id } = req.params;
 
-      const findSpecification = container.resolve(FindSpecification)
+      const findSpecification = container.resolve(FindSpecification);
 
       res.json(await findSpecification.execute(id));
     } catch (error) {
