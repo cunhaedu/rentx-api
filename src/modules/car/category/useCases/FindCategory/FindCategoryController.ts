@@ -1,16 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { FindCategory } from './FindCategory';
+import { FindCategoryUseCase } from './FindCategoryUseCase';
 
 export class FindCategoryController {
   async handle(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
 
-      const findCategory = container.resolve(FindCategory);
+      const findCategoryUseCase = container.resolve(FindCategoryUseCase);
 
-      res.json(await findCategory.execute(id));
+      res.json(await findCategoryUseCase.execute(id));
     } catch (error) {
       next(error);
     }

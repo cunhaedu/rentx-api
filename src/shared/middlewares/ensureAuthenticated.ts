@@ -34,7 +34,7 @@ export const ensureAuthenticated = async (
     const user = userRepository.findById(sub);
 
     if (!user) {
-      return res.status(422).json({ error: 'User does not exists' });
+      return res.status(401).json({ error: 'User does not exists' });
     }
 
     return next();

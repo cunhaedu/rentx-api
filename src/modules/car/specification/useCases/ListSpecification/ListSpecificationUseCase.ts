@@ -4,7 +4,7 @@ import { ISpecificationDTO } from '@modules/car/specification/dtos/ISpecificatio
 import { ISpecificationRepository } from '@modules/car/specification/repositories/ISpecificationRepository';
 
 @injectable()
-export class ListSpecification {
+export class ListSpecificationUseCase {
   constructor(
     @inject('SpecificationRepository')
     private specificationRepository: ISpecificationRepository,

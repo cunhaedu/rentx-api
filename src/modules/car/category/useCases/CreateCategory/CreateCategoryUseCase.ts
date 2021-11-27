@@ -5,7 +5,7 @@ import { ICategoryRepository } from '@modules/car/category/repositories/ICategor
 import AppError from '@shared/errors/AppError';
 
 @injectable()
-export class CreateCategory {
+export class CreateCategoryUseCase {
   constructor(
     @inject('CategoryRepository')
     private categoryRepository: ICategoryRepository,

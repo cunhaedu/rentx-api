@@ -6,7 +6,7 @@ import { ICategoryDTO } from '@modules/car/category/dtos/ICategoryDTO';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()
-export class ImportCategory {
+export class ImportCategoryUseCase {
   constructor(
     @inject('CategoryRepository')
     private categoryRepository: ICategoryRepository,

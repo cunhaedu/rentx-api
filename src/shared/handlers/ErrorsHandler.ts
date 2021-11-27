@@ -15,19 +15,10 @@ const errorsHandler = (
     });
   }
 
-  console.error(error);
-
-  if (error.name && error.message) {
-    return response.status(500).json({
-      status: 'error',
-      message: error.message,
-    });
-  }
-
   return response.status(500).json({
     status: 'error',
-    message: 'Internal Server Error',
+    message: `Internal Server Error - ${error.message}`,
   });
 };
 
-export default errorsHandler;
+export { errorsHandler };

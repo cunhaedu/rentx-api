@@ -4,7 +4,7 @@ import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()
-export class FindSpecification {
+export class FindSpecificationUseCase {
   constructor(
     @inject('SpecificationRepository')
     private specificationRepository: ISpecificationRepository,
