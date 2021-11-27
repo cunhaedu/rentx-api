@@ -31,11 +31,17 @@ export const ensureAuthenticated = async (
 
     const userRepository = new TypeormUserRepository();
 
-    const user = userRepository.findById(sub);
+    const user = await userRepository.findById(sub);
 
     if (!user) {
       return res.status(401).json({ error: 'User does not exists' });
     }
+
+    req.token = {
+      sub: {
+        user: { id: sub },
+      },
+    };
 
     return next();
   } catch (error) {

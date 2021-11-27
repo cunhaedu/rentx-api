@@ -13,11 +13,14 @@ const importCategoryController = new ImportCategoryController();
 
 const categoryRoutes = Router();
 
-const multer = upload(2048, ['csv']);
+const multerUpload = upload({
+  fileFormat: ['csv'],
+  folder: 'files',
+});
 
 categoryRoutes.post(
   '/import',
-  multer.single('file'),
+  multerUpload.single('file'),
   importCategoryController.handle,
 );
 
