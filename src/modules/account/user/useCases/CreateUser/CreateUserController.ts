@@ -7,13 +7,12 @@ import { IUserDTO } from '@modules/account/user/dtos/IUserDTO';
 export class CreateUserController {
   async handle(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { name, username, email, password, driverLicense } = req.body;
+      const { name, email, password, driverLicense } = req.body;
 
       const createUserUseCase = container.resolve(CreateUserUseCase);
 
       const user = await createUserUseCase.execute({
         name,
-        username,
         email,
         password,
         driverLicense,

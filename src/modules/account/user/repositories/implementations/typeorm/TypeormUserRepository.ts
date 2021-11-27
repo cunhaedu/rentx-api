@@ -9,16 +9,9 @@ export class TypeormUserRepository implements IUserRepository {
     this.repository = getRepository(User);
   }
 
-  async save({
-    name,
-    username,
-    email,
-    password,
-    driverLicense,
-  }: User): Promise<User> {
+  async save({ name, email, password, driverLicense }: User): Promise<User> {
     const user = await this.repository.create({
       name,
-      username,
       email,
       password,
       driverLicense,
@@ -33,6 +26,10 @@ export class TypeormUserRepository implements IUserRepository {
 
   async findById(id: string): Promise<User | undefined> {
     return this.repository.findOne(id);
+  }
+
+  async findByEmail(email: string): Promise<User | undefined> {
+    return this.repository.findOne({ email });
   }
 
   async update(id: string, data: User): Promise<void> {

@@ -12,9 +12,6 @@ export class User extends DefaultEntity implements IUserDTO {
   @Column({ name: 'name' })
   name: string;
 
-  @Column({ name: 'username' })
-  username: string;
-
   @Column({ name: 'email' })
   email: string;
 
