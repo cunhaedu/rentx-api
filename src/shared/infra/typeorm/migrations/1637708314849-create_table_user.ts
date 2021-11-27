@@ -17,12 +17,6 @@ export class createTableUser1637708314849 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'username',
-            type: 'varchar',
-            isNullable: false,
-            isUnique: true,
-          },
-          {
             name: 'password',
             type: 'varchar',
             isNullable: false,
@@ -36,6 +30,7 @@ export class createTableUser1637708314849 implements MigrationInterface {
           {
             name: 'driver_license',
             type: 'varchar',
+            isNullable: false,
           },
           {
             name: 'admin',
@@ -45,6 +40,7 @@ export class createTableUser1637708314849 implements MigrationInterface {
           {
             name: 'avatar',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'created_at',
