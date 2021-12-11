@@ -1,4 +1,4 @@
-import { InMemoryUserRepository } from '@modules/account/user/repositories/implementations/in-memory/InMemoryUserRepository';
+import { InMemoryUserRepository } from '@modules/account/user/repositories/in-memory/InMemoryUserRepository';
 import { AuthenticateUserUseCase } from '@modules/account/user/useCases/AuthenticateUser/AuthenticateUserUseCase';
 import { IUserDTO } from '@modules/account/user/dtos/IUserDTO';
 import { CreateUserUseCase } from '@modules/account/user/useCases/CreateUser/CreateUserUseCase';

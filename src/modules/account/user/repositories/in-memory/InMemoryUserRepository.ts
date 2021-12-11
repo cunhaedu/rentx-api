@@ -1,6 +1,6 @@
 import { IUserRepository } from '@modules/account/user/repositories/IUserRepository';
 import { IUserDTO } from '@modules/account/user/dtos/IUserDTO';
-import { User } from '@modules/account/user/entities/User';
+import { User } from '@modules/account/user/infra/typeorm/entities/User';
 
 export class InMemoryUserRepository implements IUserRepository {
   private users: IUserDTO[];

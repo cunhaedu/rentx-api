@@ -1,4 +1,4 @@
-import { InMemoryCategoryRepository } from '@modules/car/category/repositories/implementations/in-memory/InMemoryCategoryRepository';
+import { InMemoryCategoryRepository } from '@modules/car/category/repositories/in-memory/InMemoryCategoryRepository';
 import { ICategoryDTO } from '@modules/car/category/dtos/ICategoryDTO';
 import { CreateCategoryUseCase } from '@modules/car/category/useCases/CreateCategory/CreateCategoryUseCase';
 import AppError from '@shared/errors/AppError';

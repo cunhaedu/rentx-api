@@ -1,5 +1,5 @@
 import { ISpecificationDTO } from '@modules/car/specification/dtos/ISpecificationDTO';
-import { Specification } from '@modules/car/specification/entities/Specification';
+import { Specification } from '@modules/car/specification/infra/typeorm/entities/Specification';
 import { ISpecificationRepository } from '@modules/car/specification/repositories/ISpecificationRepository';
 
 export class InMemorySpecificationRepository

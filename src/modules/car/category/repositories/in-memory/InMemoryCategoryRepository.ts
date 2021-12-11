@@ -1,5 +1,5 @@
 import { ICategoryDTO } from '@modules/car/category/dtos/ICategoryDTO';
-import { Category } from '@modules/car/category/entities/Category';
+import { Category } from '@modules/car/category/infra/typeorm/entities/Category';
 import { ICategoryRepository } from '@modules/car/category/repositories/ICategoryRepository';
 
 export class InMemoryCategoryRepository implements ICategoryRepository {
