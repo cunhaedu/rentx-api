@@ -25,10 +25,7 @@ export class InMemoryCategoryRepository implements ICategoryRepository {
 
   async update(id: string, data: ICategoryDTO): Promise<void> {
     this.categories.map(category => {
-      if (category.id === id) {
-        // eslint-disable-next-line no-param-reassign
-        category = { ...data, id };
-      }
+      if (category.id === id) return { ...data, id };
 
       return category;
     });
@@ -39,7 +36,7 @@ export class InMemoryCategoryRepository implements ICategoryRepository {
   }
 
   async find(): Promise<Category[]> {
-    return this.categories.map(category => category);
+    return this.categories;
   }
 
   async findById(id: string): Promise<Category | undefined> {

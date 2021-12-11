@@ -1,14 +1,18 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+/* eslint-disable @typescript-eslint/no-var-requires,@typescript-eslint/ban-ts-comment */
+
 const fs = require('fs');
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
+const dotEnvSafe = require('dotenv-safe');
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-extraneous-dependencies
-const { pathsToModuleNameMapper } = require('ts-jest/utils');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const { pathsToModuleNameMapper } = require('ts-jest');
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { compilerOptions } = require('./tsconfig.json');
+
+// Loads environment variable globally in all tests.
+dotEnvSafe.config({
+  allowEmptyValues: true,
+});
 
 const blockList = ['.git'];
 const directory = 'dist';
