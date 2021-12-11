@@ -5,19 +5,8 @@ import { ICategoryRepository } from '@modules/car/category/repositories/ICategor
 export class InMemoryCategoryRepository implements ICategoryRepository {
   private categories: ICategoryDTO[];
 
-  // eslint-disable-next-line no-use-before-define
-  private static INSTANCE: InMemoryCategoryRepository;
-
-  private constructor() {
+  constructor() {
     this.categories = [];
-  }
-
-  public static getInstance(): InMemoryCategoryRepository {
-    if (!InMemoryCategoryRepository.INSTANCE) {
-      InMemoryCategoryRepository.INSTANCE = new InMemoryCategoryRepository();
-    }
-
-    return InMemoryCategoryRepository.INSTANCE;
   }
 
   async save({ name, description }: ICategoryDTO): Promise<Category> {

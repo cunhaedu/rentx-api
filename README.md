@@ -1,3 +1,3 @@
 ## Diagrama
 
-![diagrama](./github/erd.png)
+![diagrama](public/erd.png)
