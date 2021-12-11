@@ -1,23 +1,12 @@
 import { ICategoryDTO } from '@modules/car/category/dtos/ICategoryDTO';
-import { Category } from '@modules/car/category/entities/Category';
+import { Category } from '@modules/car/category/infra/typeorm/entities/Category';
 import { ICategoryRepository } from '@modules/car/category/repositories/ICategoryRepository';
 
 export class InMemoryCategoryRepository implements ICategoryRepository {
   private categories: ICategoryDTO[];
 
-  // eslint-disable-next-line no-use-before-define
-  private static INSTANCE: InMemoryCategoryRepository;
-
-  private constructor() {
+  constructor() {
     this.categories = [];
-  }
-
-  public static getInstance(): InMemoryCategoryRepository {
-    if (!InMemoryCategoryRepository.INSTANCE) {
-      InMemoryCategoryRepository.INSTANCE = new InMemoryCategoryRepository();
-    }
-
-    return InMemoryCategoryRepository.INSTANCE;
   }
 
   async save({ name, description }: ICategoryDTO): Promise<Category> {
@@ -36,10 +25,7 @@ export class InMemoryCategoryRepository implements ICategoryRepository {
 
   async update(id: string, data: ICategoryDTO): Promise<void> {
     this.categories.map(category => {
-      if (category.id === id) {
-        // eslint-disable-next-line no-param-reassign
-        category = { ...data, id };
-      }
+      if (category.id === id) return { ...data, id };
 
       return category;
     });
@@ -50,7 +36,7 @@ export class InMemoryCategoryRepository implements ICategoryRepository {
   }
 
   async find(): Promise<Category[]> {
-    return this.categories.map(category => category);
+    return this.categories;
   }
 
   async findById(id: string): Promise<Category | undefined> {

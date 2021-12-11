@@ -7,7 +7,7 @@ import { IUserDTO } from '@modules/account/user/dtos/IUserDTO';
 @Entity('user')
 export class User extends DefaultEntity implements IUserDTO {
   @PrimaryColumn({ name: 'id' })
-  id: string;
+  id?: string;
 
   @Column({ name: 'name' })
   name: string;
@@ -19,10 +19,10 @@ export class User extends DefaultEntity implements IUserDTO {
   password: string;
 
   @Column({ name: 'admin' })
-  isAdmin: boolean;
+  isAdmin?: boolean;
 
   @Column()
-  avatar: string;
+  avatar?: string;
 
   @Column({ name: 'driver_license' })
   driverLicense: string;

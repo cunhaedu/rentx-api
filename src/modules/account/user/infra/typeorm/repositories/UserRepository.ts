@@ -1,8 +1,8 @@
 import { IUserRepository } from '@modules/account/user/repositories/IUserRepository';
 import { getRepository, Repository } from 'typeorm';
-import { User } from '@modules/account/user/entities/User';
+import { User } from '@modules/account/user/infra/typeorm/entities/User';
 
-export class TypeormUserRepository implements IUserRepository {
+export class UserRepository implements IUserRepository {
   private repository: Repository<User>;
 
   constructor() {

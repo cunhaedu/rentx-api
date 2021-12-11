@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
 import auth from '@config/auth';
-import { TypeormUserRepository } from '@modules/account/user/repositories/implementations/typeorm/TypeormUserRepository';
+import { UserRepository } from '@modules/account/user/infra/typeorm/repositories/UserRepository';
 
 interface IPayload {
   sub: string;
@@ -29,7 +29,7 @@ export const ensureAuthenticated = async (
   try {
     const { sub } = verify(token, authConfig.SECRET) as IPayload;
 
-    const userRepository = new TypeormUserRepository();
+    const userRepository = new UserRepository();
 
     const user = await userRepository.findById(sub);
 

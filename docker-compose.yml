@@ -1,30 +1,38 @@
 version: "3.7"
 
 services:
-  # database_ignite:
-  #   image: postgres
-  #   container_name: database_ignite
-  #   restart: always
-  #   ports:
-  #     - 5432:5432
-  #   environment:
-  #     - POSTGRES_USER=docker
-  #     - POSTGRES_PASSWORD=docker
-  #     - POSTGRES_DB=rentx
-  #   volumes:
-  #     - pgdata:/data/postgres
-  app:
-    build: .
-    container_name: rentx
+  database_ignite:
+    image: postgres
+    container_name: database_ignite
+    restart: always
     ports:
-      - 3000:3000
+      - "3333:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=rentx
+    volumes:
+      - pgdata:/data/postgres
+    networks:
+      - rs_ws_env_nw
+  app:
+    image: node:fermium-alpine
+    command: npm run dev:server
+    container_name: rentx
+    restart: "on-failure"
+    ports:
+      - "3000:3000"
     volumes:
       - .:/user/app
-    # links:
-    #   - database_ignite
-    # depends_on:
-    #   - database_ignite
+    working_dir: /user/app
+    networks:
+      - rs_ws_env_nw
+    depends_on:
+      - database_ignite
 
 volumes:
   pgdata:
     driver: local
+
+networks:
+  rs_ws_env_nw:
