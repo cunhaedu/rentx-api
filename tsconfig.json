@@ -1,7 +1,4 @@
 {
-  "ts-node": {
-    "files": true
-  },
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "lib": [
@@ -15,28 +12,28 @@
     "strict": true,
     "strictPropertyInitialization": false,
     "baseUrl": "./src",
-    "paths": {
-      "@modules/*": [
-        "modules/*"
-      ],
-      "@shared/*": [
-        "shared/*"
-      ],
-      "@core/*": [
-        "core/*"
-      ],
-      "@config/*": [
-        "config/*"
-      ],
-    },
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
+    "allowJs": true,
+    "checkJs": true,
+    "diagnostics": true,
+    "paths": {
+      "@modules/*": ["modules/*"],
+      "@shared/*": ["shared/*"],
+      "@config/*": ["config/*"]
+    },
     "typeRoots": [
-      "./src/@types",
+      "@types",
       "./node_modules/@types"
     ]
-  }
+  },
+  "exclude": [
+    "assets",
+    "jest.*",
+    "prettier.*",
+    "tsconfig.*"
+  ]
 }

@@ -5,6 +5,6 @@ export interface IUserDTO extends IDefaultDTO {
   email: string;
   password: string;
   driverLicense: string;
-  isAdmin: boolean;
-  avatar: string;
+  isAdmin?: boolean;
+  avatar?: string;
 }

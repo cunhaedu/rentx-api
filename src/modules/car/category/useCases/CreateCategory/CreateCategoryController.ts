@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { ICategoryDTO } from '@modules/car/category/dtos/ICategoryDTO';
 import { CreateCategoryUseCase } from './CreateCategoryUseCase';
 
 export class CreateCategoryController {
@@ -13,7 +12,7 @@ export class CreateCategoryController {
       const category = await createCategoryUseCase.execute({
         name,
         description,
-      } as ICategoryDTO);
+      });
 
       res.status(201).json(category);
     } catch (error) {

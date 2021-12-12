@@ -1,21 +1,18 @@
 import { container } from 'tsyringe';
 
 import { ICategoryRepository } from '@modules/car/category/repositories/ICategoryRepository';
-import { TypeormCategoryRepository } from '@modules/car/category/repositories/implementations/typeorm/TypeormCategoryRepository';
+import { CategoryRepository } from '@modules/car/category/infra/typeorm/repositories/CategoryRepository';
 import { ISpecificationRepository } from '@modules/car/specification/repositories/ISpecificationRepository';
-import { TypeormSpecificationRepository } from '@modules/car/specification/repositories/implementations/typeorm/TypeormSpecificationRepository';
+import { SpecificationRepository } from '@modules/car/specification/infra/typeorm/repositories/SpecificationRepository';
 import { IUserRepository } from '@modules/account/user/repositories/IUserRepository';
-import { TypeormUserRepository } from '@modules/account/user/repositories/implementations/typeorm/TypeormUserRepository';
+import { UserRepository } from '@modules/account/user/infra/typeorm/repositories/UserRepository';
 
 container.registerSingleton<ICategoryRepository>(
   'CategoryRepository',
-  TypeormCategoryRepository,
+  CategoryRepository,
 );
 container.registerSingleton<ISpecificationRepository>(
   'SpecificationRepository',
-  TypeormSpecificationRepository,
+  SpecificationRepository,
 );
-container.registerSingleton<IUserRepository>(
-  'UserRepository',
-  TypeormUserRepository,
-);
+container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
