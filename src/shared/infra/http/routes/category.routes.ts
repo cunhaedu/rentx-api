@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import { CreateCategoryController } from '@modules/car/category/useCases/CreateCategory/CreateCategoryController';
-import { FindCategoryController } from '@modules/car/category/useCases/FindCategory/FindCategoryController';
-import { ListCategoryController } from '@modules/car/category/useCases/ListCategory/ListCategoryController';
-import { ImportCategoryController } from '@modules/car/category/useCases/ImportCategory/ImportCategoryController';
+import { CreateCategoryController } from '@modules/category/useCases/CreateCategory/CreateCategoryController';
+import { FindCategoryController } from '@modules/category/useCases/FindCategory/FindCategoryController';
+import { ListCategoryController } from '@modules/category/useCases/ListCategory/ListCategoryController';
+import { ImportCategoryController } from '@modules/category/useCases/ImportCategory/ImportCategoryController';
 import upload from '@shared/infra/http/middlewares/upload';
 
 const createCategoryController = new CreateCategoryController();

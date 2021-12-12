@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { CreateUserController } from '@modules/account/user/useCases/CreateUser/CreateUserController';
-import { UpdatedUserAvatarController } from '@modules/account/user/useCases/UpdateUserAvatar/UpdatedUserAvatarController';
+import { CreateUserController } from '@modules/user/useCases/CreateUser/CreateUserController';
+import { UpdatedUserAvatarController } from '@modules/user/useCases/UpdateUserAvatar/UpdatedUserAvatarController';
 import upload from '@shared/infra/http/middlewares/upload';
 import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthenticated';
 

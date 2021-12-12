@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
 import auth from '@config/auth';
-import { UserRepository } from '@modules/account/user/infra/typeorm/repositories/UserRepository';
+import { UserRepository } from '@modules/user/infra/typeorm/repositories/UserRepository';
 
 interface IPayload {
   sub: string;
