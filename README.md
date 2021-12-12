@@ -7,11 +7,11 @@ Car rental API developed during Ignite bootcamp from [Rocketseat](https://www.ro
 ## :pushpin: Content Table
 
 * [Features](#rocket-features)
-* [Api Documentation](#rocket-features)
+* [Api Documentation](#open_book-api-documentation)
 * [Application Requirements](#closed_book-application-requirements)
-* [Database Model](#database-model)
-* [Api Status Codes](#api-status-codes)
-* [Installation](#construction_worker-first-steps)
+* [Database Model](#clipboard-database-model)
+* [Api Status Codes](#vertical_traffic_light-api-status-codes)
+* [First steps](#construction_worker-first-steps)
 * [Getting Started Without Docker](#runner-getting-started-without-docker)
 * [Getting Started With Docker](#runner-getting-started-with-docker)
 * [Build](#runner-build)
@@ -26,7 +26,7 @@ Car rental API developed during Ignite bootcamp from [Rocketseat](https://www.ro
 * Car rental
 * Users CRUD
 
-## Api Documentation
+## :open_book: Api Documentation
 
 Once you got this application running on your machine
 you can go to [localhost:3000/api_docs](http://localhost:3000/api_docs)
@@ -37,11 +37,11 @@ to see the full api documentation built with [swagger](https://swagger.io/)
 Check out the [REQUIREMENTS](./REQUIREMENTS.md) page to see the full application requirements
 such as Business Rules and function and non-function requirements
 
-## Database model
+## :clipboard: Database model
 
 ![model](public/erd.png)
 
-## API Status Codes
+## :vertical_traffic_light: API Status Codes
 
 Check the following status codes in this API:
 
