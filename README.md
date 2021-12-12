@@ -142,4 +142,4 @@ This project use the following technologies:
 
 ## :closed_book: License
 
-This project is under MIT License.See the [LICENSE](https://github.com/cunhaedu/proffy/tree/master/LICENSE) file for more details.
+This project is under MIT License.See the [LICENSE](./LICENSE) file for more details.
