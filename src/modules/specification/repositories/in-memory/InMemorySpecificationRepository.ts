@@ -5,22 +5,10 @@ import { ISpecificationRepository } from '@modules/specification/repositories/IS
 export class InMemorySpecificationRepository
   implements ISpecificationRepository
 {
-  private specification: ISpecificationDTO[];
+  private specification: Specification[];
 
-  // eslint-disable-next-line no-use-before-define
-  private static INSTANCE: InMemorySpecificationRepository;
-
-  private constructor() {
+  constructor() {
     this.specification = [];
-  }
-
-  public static getInstance(): InMemorySpecificationRepository {
-    if (!InMemorySpecificationRepository.INSTANCE) {
-      InMemorySpecificationRepository.INSTANCE =
-        new InMemorySpecificationRepository();
-    }
-
-    return InMemorySpecificationRepository.INSTANCE;
   }
 
   async save({ name, description }: ISpecificationDTO): Promise<Specification> {
@@ -38,13 +26,8 @@ export class InMemorySpecificationRepository
   }
 
   async update(id: string, data: ISpecificationDTO): Promise<void> {
-    this.specification.map(category => {
-      if (category.id === id) {
-        // eslint-disable-next-line no-param-reassign
-        category = { ...data, id };
-      }
-
-      return category;
+    this.specification = this.specification.map(category => {
+      return category.id === id ? { ...data, id } : category;
     });
   }
 

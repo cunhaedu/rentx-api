@@ -3,7 +3,7 @@ import { Category } from '@modules/category/infra/typeorm/entities/Category';
 import { ICategoryRepository } from '@modules/category/repositories/ICategoryRepository';
 
 export class InMemoryCategoryRepository implements ICategoryRepository {
-  private categories: ICategoryDTO[];
+  private categories: Category[];
 
   constructor() {
     this.categories = [];
@@ -24,10 +24,8 @@ export class InMemoryCategoryRepository implements ICategoryRepository {
   }
 
   async update(id: string, data: ICategoryDTO): Promise<void> {
-    this.categories.map(category => {
-      if (category.id === id) return { ...data, id };
-
-      return category;
+    this.categories = this.categories.map(category => {
+      return category.id === id ? { ...data, id } : category;
     });
   }
 

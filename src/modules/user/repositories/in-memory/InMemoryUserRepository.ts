@@ -3,7 +3,7 @@ import { IUserDTO } from '@modules/user/dtos/IUserDTO';
 import { User } from '@modules/user/infra/typeorm/entities/User';
 
 export class InMemoryUserRepository implements IUserRepository {
-  private users: IUserDTO[];
+  private users: User[];
 
   constructor() {
     this.users = [];
@@ -38,10 +38,8 @@ export class InMemoryUserRepository implements IUserRepository {
   }
 
   async update(id: string, data: User): Promise<void> {
-    this.users.map(user => {
-      if (user.id === id) return { ...data, id };
-
-      return user;
+    this.users = this.users.map(user => {
+      return user.id === id ? { ...data, id } : user;
     });
   }
 

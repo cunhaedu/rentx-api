@@ -7,7 +7,7 @@ let createCategoryUseCase: CreateCategoryUseCase;
 let inMemoryCategoryRepository: InMemoryCategoryRepository;
 
 describe('create category test suit', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     inMemoryCategoryRepository = new InMemoryCategoryRepository();
     createCategoryUseCase = new CreateCategoryUseCase(
       inMemoryCategoryRepository,
@@ -34,12 +34,19 @@ describe('create category test suit', () => {
 
   it('should not be able to create a new category with repeat name', async () => {
     await expect(async () => {
-      const categoryData: ICategoryDTO = {
+      const category: ICategoryDTO = {
         name: 'Category name test',
         description: 'Category description test',
       };
 
-      await createCategoryUseCase.execute(categoryData);
+      await createCategoryUseCase.execute(category);
+
+      const category2: ICategoryDTO = {
+        name: 'Category name test',
+        description: 'Category description test',
+      };
+
+      await createCategoryUseCase.execute(category2);
     }).rejects.toBeInstanceOf(AppError);
   });
 });
