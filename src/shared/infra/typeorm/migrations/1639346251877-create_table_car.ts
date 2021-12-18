@@ -4,7 +4,7 @@ export default class createTableCar1639346251877 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'car',
+        name: 'cars',
         columns: [
           {
             name: 'id',
@@ -70,7 +70,7 @@ export default class createTableCar1639346251877 implements MigrationInterface {
             name: 'car_category_fk',
             columnNames: ['category_id'],
             referencedColumnNames: ['id'],
-            referencedTableName: 'category',
+            referencedTableName: 'categories',
             onUpdate: 'SET NULL',
             onDelete: 'SET NULL',
           },
@@ -80,6 +80,6 @@ export default class createTableCar1639346251877 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('car');
+    await queryRunner.dropTable('cars');
   }
 }

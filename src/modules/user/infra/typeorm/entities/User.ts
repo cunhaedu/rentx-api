@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { DefaultEntity } from '@shared/infra/typeorm/entities/DefaultEntity';
 import { IUserDTO } from '@modules/user/dtos/IUserDTO';
 
-@Entity('user')
+@Entity('users')
 export class User extends DefaultEntity implements IUserDTO {
   @PrimaryColumn({ name: 'id' })
   id?: string;
@@ -18,7 +18,7 @@ export class User extends DefaultEntity implements IUserDTO {
   @Column({ name: 'password' })
   password: string;
 
-  @Column({ name: 'admin' })
+  @Column({ name: 'is_admin' })
   isAdmin?: boolean;
 
   @Column()

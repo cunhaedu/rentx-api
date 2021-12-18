@@ -4,7 +4,7 @@ import { Column, Entity, PrimaryColumn } from 'typeorm';
 import { ICategoryDTO } from '@modules/category/dtos/ICategoryDTO';
 import { DefaultEntity } from '@shared/infra/typeorm/entities/DefaultEntity';
 
-@Entity('category')
+@Entity('categories')
 export class Category extends DefaultEntity implements ICategoryDTO {
   @PrimaryColumn()
   id?: string;

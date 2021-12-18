@@ -4,7 +4,7 @@ import { Column, Entity, PrimaryColumn } from 'typeorm';
 import { ISpecificationDTO } from '@modules/specification/dtos/ISpecificationDTO';
 import { DefaultEntity } from '@shared/infra/typeorm/entities/DefaultEntity';
 
-@Entity('specification')
+@Entity('specifications')
 export class Specification extends DefaultEntity implements ISpecificationDTO {
   @PrimaryColumn()
   id?: string;

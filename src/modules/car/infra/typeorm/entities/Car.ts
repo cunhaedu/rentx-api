@@ -5,7 +5,7 @@ import { DefaultEntity } from '@shared/infra/typeorm/entities/DefaultEntity';
 import { ICarDTO } from '@modules/car/dtos/ICarDTO';
 import { Category } from '@modules/category/infra/typeorm/entities/Category';
 
-@Entity('car')
+@Entity('cars')
 export class Car extends DefaultEntity implements ICarDTO {
   @PrimaryColumn()
   id?: string;
@@ -20,7 +20,7 @@ export class Car extends DefaultEntity implements ICarDTO {
   brand: string;
 
   @Column()
-  available? = true;
+  available?: boolean;
 
   @Column({ name: 'daily_rate' })
   dailyRate: number;
@@ -39,6 +39,7 @@ export class Car extends DefaultEntity implements ICarDTO {
     super();
     if (!this.id) {
       this.id = uuidv4();
+      this.available = true;
     }
   }
 }
