@@ -4,7 +4,11 @@ import { CreateCategoryController } from '@modules/category/useCases/CreateCateg
 import { FindCategoryController } from '@modules/category/useCases/FindCategory/FindCategoryController';
 import { ListCategoryController } from '@modules/category/useCases/ListCategory/ListCategoryController';
 import { ImportCategoryController } from '@modules/category/useCases/ImportCategory/ImportCategoryController';
-import upload from '@shared/infra/http/middlewares/upload';
+import {
+  ensureAdmin,
+  ensureAuthenticated,
+  upload,
+} from '@shared/infra/http/middlewares';
 
 const createCategoryController = new CreateCategoryController();
 const findCategoryController = new FindCategoryController();
@@ -24,7 +28,12 @@ categoryRoutes.post(
   importCategoryController.handle,
 );
 
-categoryRoutes.post('/', createCategoryController.handle);
+categoryRoutes.post(
+  '/',
+  ensureAuthenticated,
+  ensureAdmin,
+  createCategoryController.handle,
+);
 
 categoryRoutes.get('/', listCategoryController.handle);
 

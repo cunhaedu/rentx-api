@@ -2,8 +2,7 @@ import { Router } from 'express';
 
 import { CreateUserController } from '@modules/user/useCases/CreateUser/CreateUserController';
 import { UpdatedUserAvatarController } from '@modules/user/useCases/UpdateUserAvatar/UpdatedUserAvatarController';
-import upload from '@shared/infra/http/middlewares/upload';
-import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthenticated';
+import { ensureAuthenticated, upload } from '@shared/infra/http/middlewares';
 
 const createUserController = new CreateUserController();
 const updateUserAvatarController = new UpdatedUserAvatarController();

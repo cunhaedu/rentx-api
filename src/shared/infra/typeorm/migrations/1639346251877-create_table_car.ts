@@ -38,7 +38,7 @@ export default class createTableCar1639346251877 implements MigrationInterface {
           },
           {
             name: 'brand',
-            type: 'numeric',
+            type: 'varchar',
           },
           {
             name: 'category_id',
