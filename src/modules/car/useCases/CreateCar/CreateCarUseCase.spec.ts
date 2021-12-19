@@ -1,11 +1,12 @@
 import { CreateCarUseCase } from '@modules/car/useCases/CreateCar/CreateCarUseCase';
+import { ICategoryDTO } from '@modules/category/dtos/ICategoryDTO';
 import { ICarDTO } from '@modules/car/dtos/ICarDTO';
 import { InMemoryCarRepository } from '@modules/car/repositories/in-memory/InMemoryCarRepository';
-import { ICategoryDTO } from '@modules/category/dtos/ICategoryDTO';
+import { ICarRepository } from '@modules/car/repositories/ICarRepository';
 import AppError from '@shared/errors/AppError';
 
 let createCarUseCase: CreateCarUseCase;
-let inMemoryCarRepository: InMemoryCarRepository;
+let inMemoryCarRepository: ICarRepository;
 
 describe('Create car test suit', () => {
   beforeEach(() => {

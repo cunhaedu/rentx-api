@@ -41,6 +41,12 @@ export class InMemorySpecificationRepository
     return this.specification.map(category => category);
   }
 
+  async findByIds(ids: string[]): Promise<Specification[]> {
+    return this.specification.filter(category =>
+      ids.includes(<string>category.id),
+    );
+  }
+
   async findById(id: string): Promise<Specification | undefined> {
     return this.specification.find(category => category.id === id);
   }

@@ -1,5 +1,6 @@
 import { IDefaultDTO } from '@shared/dtos/IDefaultDTO';
 import { ICategoryDTO } from '@modules/category/dtos/ICategoryDTO';
+import { ISpecificationDTO } from '@modules/specification/dtos/ISpecificationDTO';
 
 export interface ICarDTO extends IDefaultDTO {
   name: string;
@@ -10,4 +11,5 @@ export interface ICarDTO extends IDefaultDTO {
   fineAmount: number;
   brand: string;
   category?: ICategoryDTO;
+  specifications?: ISpecificationDTO[];
 }

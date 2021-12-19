@@ -39,4 +39,8 @@ export class SpecificationRepository implements ISpecificationRepository {
   async findByName(name: string): Promise<Specification | undefined> {
     return this.repository.findOne({ name });
   }
+
+  findByIds(ids: string[]): Promise<ISpecificationDTO[]> {
+    return this.repository.findByIds(ids);
+  }
 }
