@@ -3,7 +3,7 @@ import { Response, Request, NextFunction } from 'express';
 import AppError from '@shared/errors/AppError';
 
 const errorsHandler = (
-  error: Error,
+  error: Error | AppError,
   _request: Request,
   response: Response,
   _: NextFunction,
