@@ -7,12 +7,14 @@ import {
   JoinColumn,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
 
 import { DefaultEntity } from '@shared/infra/typeorm/entities/DefaultEntity';
 import { ICarDTO } from '@modules/car/dtos/ICarDTO';
 import { Category } from '@modules/category/infra/typeorm/entities/Category';
 import { Specification } from '@modules/specification/infra/typeorm/entities/Specification';
+import { CarImage } from '@modules/car/infra/typeorm/entities/CarImage';
 
 @Entity('cars')
 export class Car extends DefaultEntity implements ICarDTO {
@@ -51,6 +53,9 @@ export class Car extends DefaultEntity implements ICarDTO {
     inverseJoinColumn: { name: 'specification_id', referencedColumnName: 'id' },
   })
   specifications?: Specification[];
+
+  @OneToMany(() => CarImage, image => image.car)
+  images?: CarImage[];
 
   constructor() {
     super();

@@ -11,7 +11,16 @@ interface IMulterRequest {
 const storageTypes = {
   local(folder: string) {
     return multer.diskStorage({
-      destination: resolve(__dirname, '..', '..', '..', 'uploads', folder),
+      destination: resolve(
+        __dirname,
+        '..',
+        '..',
+        '..',
+        '..',
+        '..',
+        'uploads',
+        folder,
+      ),
       filename: (request, file, cb) => {
         crypto.randomBytes(8, (err, hash) => {
           if (err) cb(err, '');

@@ -1,6 +1,7 @@
 import { IDefaultDTO } from '@shared/dtos/IDefaultDTO';
 import { ICategoryDTO } from '@modules/category/dtos/ICategoryDTO';
 import { ISpecificationDTO } from '@modules/specification/dtos/ISpecificationDTO';
+import { ICarImageDTO } from '@modules/car/dtos/ICarImageDTO';
 
 export interface ICarDTO extends IDefaultDTO {
   name: string;
@@ -12,4 +13,5 @@ export interface ICarDTO extends IDefaultDTO {
   brand: string;
   category?: ICategoryDTO;
   specifications?: ISpecificationDTO[];
+  images?: ICarImageDTO[];
 }

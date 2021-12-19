@@ -6,11 +6,19 @@ import { CreateCarSpecificationController } from '@modules/car/useCases/CreateCa
 import {
   ensureAdmin,
   ensureAuthenticated,
+  upload,
 } from '@shared/infra/http/middlewares';
+import { UploadCarImageController } from '@modules/car/useCases/UploadCarImage/UploadCarImageController';
 
 const createCarController = new CreateCarController();
 const createCarSpecificationController = new CreateCarSpecificationController();
 const listAvailableCarController = new ListAvailableCarController();
+const uploadCarImageController = new UploadCarImageController();
+
+const multerUpload = upload({
+  fileFormat: ['png', 'svg', 'jpg', 'jpeg'],
+  folder: 'cars/images',
+});
 
 const carRoutes = Router();
 
@@ -28,6 +36,14 @@ carRoutes.post(
   ensureAuthenticated,
   ensureAdmin,
   createCarSpecificationController.handle,
+);
+
+carRoutes.post(
+  '/images/:id',
+  ensureAuthenticated,
+  ensureAdmin,
+  multerUpload.array('images'),
+  uploadCarImageController.handle,
 );
 
 export { carRoutes };
