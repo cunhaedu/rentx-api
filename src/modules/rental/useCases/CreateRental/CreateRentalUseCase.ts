@@ -15,7 +15,6 @@ export class CreateRentalUseCase {
   ) {}
 
   async execute(data: IRentalDTO): Promise<IRentalDTO> {
-    const minimumRentalHours = 24;
     const carUnavailable = await this.rentalRepository.findOpenRentalByCar(
       <string>data.car.id,
     );
@@ -32,10 +31,18 @@ export class CreateRentalUseCase {
       throw new AppError('User already have an open rental!');
     }
 
+    this.validateRentalHours(data.expectedReturnDate);
+
+    return this.rentalRepository.save(data);
+  }
+
+  private validateRentalHours(expectedReturnDate: Date): void {
+    const minimumRentalHours = 24;
+
     const currentDate = this.dateProvider.getCurrentDate();
     const rentalHours = this.dateProvider.compare(
       currentDate,
-      data.expectedReturnDate,
+      expectedReturnDate,
       'hours',
     );
 
@@ -44,7 +51,5 @@ export class CreateRentalUseCase {
         'Return car date should have more than 24 hours from start rental date',
       );
     }
-
-    return this.rentalRepository.save(data);
   }
 }

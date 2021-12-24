@@ -11,13 +11,13 @@ export class Rental extends DefaultEntity implements IRentalDTO {
   @PrimaryColumn()
   id?: string;
 
-  @Column()
+  @Column({ name: 'end_date' })
   endDate: Date;
 
-  @Column()
+  @Column({ name: 'expected_return_date' })
   expectedReturnDate: Date;
 
-  @Column()
+  @Column({ name: 'start_date' })
   startDate: Date;
 
   @Column()

@@ -38,6 +38,7 @@ export default class createTableRentals1640353915941
           {
             name: 'total',
             type: 'numeric',
+            isNullable: true,
           },
           {
             name: 'created_at',
