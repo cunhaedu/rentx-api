@@ -1,10 +1,9 @@
-import { createConnection, getConnection } from 'typeorm';
+import { createConnection } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { hash } from 'bcrypt';
 
 async function create() {
-  await createConnection();
-  const connection = getConnection();
+  const connection = await createConnection();
 
   const user = {
     id: uuidv4(),

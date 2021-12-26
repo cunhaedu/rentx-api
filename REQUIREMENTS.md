@@ -54,6 +54,7 @@
 - Deve ser possível cadastrar um aluguel
 
 ### Regras de negócio (RN)
+- O usuário deve estar logado no sistema
 - O aluguel deve ter duração mínima de 24 horas
 - O usuário não pode ter dois alugueis no mesmo período
 - Um carro não pode ser alugado mais de uma vez para o mesmo período
