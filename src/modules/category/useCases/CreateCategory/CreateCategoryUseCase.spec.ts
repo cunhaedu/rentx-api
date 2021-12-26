@@ -6,7 +6,7 @@ import AppError from '@shared/errors/AppError';
 let createCategoryUseCase: CreateCategoryUseCase;
 let inMemoryCategoryRepository: InMemoryCategoryRepository;
 
-describe('create category test suit', () => {
+describe('create category use case test suit', () => {
   beforeEach(() => {
     inMemoryCategoryRepository = new InMemoryCategoryRepository();
     createCategoryUseCase = new CreateCategoryUseCase(
