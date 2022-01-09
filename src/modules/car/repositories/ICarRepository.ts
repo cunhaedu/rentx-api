@@ -11,4 +11,5 @@ export interface ICarRepository {
   findAvailable(options?: IFindAvailableCarsOptions): Promise<ICarDTO[]>;
   findById(id: string): Promise<ICarDTO | undefined>;
   findByLicensePlate(licensePlate: string): Promise<ICarDTO | undefined>;
+  update(id: string, data: ICarDTO): Promise<void>;
 }

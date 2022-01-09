@@ -3,6 +3,8 @@ import dayjs from 'dayjs';
 import { CreateRentalUseCase } from '@modules/rental/useCases/CreateRental/CreateRentalUseCase';
 import { IRentalRepository } from '@modules/rental/repositories/IRentalRepository';
 import { InMemoryRentalRepository } from '@modules/rental/repositories/in-memory/InMemoryRentalRepository';
+import { InMemoryCarRepository } from '@modules/car/repositories/in-memory/InMemoryCarRepository';
+import { ICarRepository } from '@modules/car/repositories/ICarRepository';
 import { IRentalDTO } from '@modules/rental/dtos/IRentalDTO';
 import { ICarDTO } from '@modules/car/dtos/ICarDTO';
 import { IUserDTO } from '@modules/user/dtos/IUserDTO';
@@ -12,6 +14,7 @@ import AppError from '@shared/errors/AppError';
 
 let createRentalUseCase: CreateRentalUseCase;
 let inMemoryRentalRepository: IRentalRepository;
+let inMemoryCarRepository: ICarRepository;
 let dayJsDateProvider: IDateProvider;
 
 describe('Create rental test suit', () => {
@@ -19,9 +22,11 @@ describe('Create rental test suit', () => {
 
   beforeEach(() => {
     inMemoryRentalRepository = new InMemoryRentalRepository();
+    inMemoryCarRepository = new InMemoryCarRepository();
     dayJsDateProvider = new DayJsDateProvider();
     createRentalUseCase = new CreateRentalUseCase(
       inMemoryRentalRepository,
+      inMemoryCarRepository,
       dayJsDateProvider,
     );
   });
