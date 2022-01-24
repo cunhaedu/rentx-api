@@ -24,6 +24,8 @@ const multerUpload = upload({
 
 categoryRoutes.post(
   '/import',
+  ensureAuthenticated,
+  ensureAdmin,
   multerUpload.single('file'),
   importCategoryController.handle,
 );

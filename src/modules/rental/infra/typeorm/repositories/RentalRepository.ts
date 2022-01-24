@@ -37,6 +37,7 @@ export class RentalRepository implements IRentalRepository {
 
   async listByUser(user: string): Promise<Rental[]> {
     return this.repository.find({
+      relations: ['car'],
       where: { user: { id: user } },
     });
   }
