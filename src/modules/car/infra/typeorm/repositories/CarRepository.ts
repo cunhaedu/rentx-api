@@ -51,4 +51,8 @@ export class CarRepository implements ICarRepository {
     const car = this.repository.create(data);
     return this.repository.save(car);
   }
+
+  async update(id: string, data: Car): Promise<void> {
+    await this.repository.update(id, data);
+  }
 }

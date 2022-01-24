@@ -6,7 +6,7 @@ import { ICarDTO } from '@modules/car/dtos/ICarDTO';
 import { Car } from '@modules/car/infra/typeorm/entities/Car';
 
 export class InMemoryCarRepository implements ICarRepository {
-  private readonly cars: ICarDTO[];
+  private cars: ICarDTO[];
 
   constructor() {
     this.cars = [];
@@ -53,5 +53,11 @@ export class InMemoryCarRepository implements ICarRepository {
 
   async findByLicensePlate(licensePlate: string): Promise<Car | undefined> {
     return this.cars.find(car => car.licensePlate === licensePlate);
+  }
+
+  async update(id: string, data: ICarDTO): Promise<void> {
+    this.cars = this.cars.map(car => {
+      return car.id === id ? { id, ...data, ...car } : car;
+    });
   }
 }
