@@ -33,20 +33,20 @@ describe('create category use case test suit', () => {
   });
 
   it('should not be able to create a new category with repeat name', async () => {
-    await expect(async () => {
-      const category: ICategoryDTO = {
-        name: 'Category name test',
-        description: 'Category description test',
-      };
+    const category: ICategoryDTO = {
+      name: 'Category name test',
+      description: 'Category description test',
+    };
 
-      await createCategoryUseCase.execute(category);
+    await createCategoryUseCase.execute(category);
 
-      const category2: ICategoryDTO = {
-        name: 'Category name test',
-        description: 'Category description test',
-      };
+    const category2: ICategoryDTO = {
+      name: 'Category name test',
+      description: 'Category description test',
+    };
 
-      await createCategoryUseCase.execute(category2);
-    }).rejects.toBeInstanceOf(AppError);
+    await expect(createCategoryUseCase.execute(category2)).rejects.toEqual(
+      new AppError('Category already exists!', 422),
+    );
   });
 });

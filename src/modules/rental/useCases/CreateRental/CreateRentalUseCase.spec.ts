@@ -45,52 +45,53 @@ describe('Create rental test suit', () => {
   });
 
   it('should not be able to create a new rental if there is another rental open to the same user', async () => {
-    await expect(async () => {
-      const rental = {
-        expectedReturnDate: currentDateWithOneMoreDay,
-        car: { id: 'car' } as ICarDTO,
-        user: { id: 'user' } as IUserDTO,
-      } as IRentalDTO;
+    const rental = {
+      expectedReturnDate: currentDateWithOneMoreDay,
+      car: { id: 'car' } as ICarDTO,
+      user: { id: 'user' } as IUserDTO,
+    } as IRentalDTO;
 
-      const invalidRental = {
-        expectedReturnDate: currentDateWithOneMoreDay,
-        car: { id: 'another_car' } as ICarDTO,
-        user: { id: 'user' } as IUserDTO,
-      } as IRentalDTO;
+    const invalidRental = {
+      expectedReturnDate: currentDateWithOneMoreDay,
+      car: { id: 'another_car' } as ICarDTO,
+      user: { id: 'user' } as IUserDTO,
+    } as IRentalDTO;
 
-      await createRentalUseCase.execute(rental);
-      await createRentalUseCase.execute(invalidRental);
-    }).rejects.toBeInstanceOf(AppError);
+    await createRentalUseCase.execute(rental);
+    await expect(createRentalUseCase.execute(invalidRental)).rejects.toEqual(
+      new AppError('User already have an open rental!'),
+    );
   });
 
   it('should not be able to create a new rental if there is another rental open to the same car', async () => {
-    await expect(async () => {
-      const rental = {
-        expectedReturnDate: currentDateWithOneMoreDay,
-        car: { id: 'car' } as ICarDTO,
-        user: { id: 'user' } as IUserDTO,
-      } as IRentalDTO;
+    const rental = {
+      expectedReturnDate: currentDateWithOneMoreDay,
+      car: { id: 'car' } as ICarDTO,
+      user: { id: 'user' } as IUserDTO,
+    } as IRentalDTO;
 
-      const invalidRental = {
-        expectedReturnDate: currentDateWithOneMoreDay,
-        car: { id: 'car' } as ICarDTO,
-        user: { id: 'another_user' } as IUserDTO,
-      } as IRentalDTO;
+    const invalidRental = {
+      expectedReturnDate: currentDateWithOneMoreDay,
+      car: { id: 'car' } as ICarDTO,
+      user: { id: 'another_user' } as IUserDTO,
+    } as IRentalDTO;
 
-      await createRentalUseCase.execute(rental);
-      await createRentalUseCase.execute(invalidRental);
-    }).rejects.toBeInstanceOf(AppError);
+    await createRentalUseCase.execute(rental);
+    await expect(createRentalUseCase.execute(invalidRental)).rejects.toEqual(
+      new AppError('Car is unavailable'),
+    );
   });
 
   it('should not be able to create a new rental with invalid return time', async () => {
-    await expect(async () => {
-      const rental = {
-        expectedReturnDate: dayjs().toDate(),
-        car: { id: 'car' } as ICarDTO,
-        user: { id: 'user' } as IUserDTO,
-      } as IRentalDTO;
-
-      await createRentalUseCase.execute(rental);
-    }).rejects.toBeInstanceOf(AppError);
+    const rental = {
+      expectedReturnDate: dayjs().toDate(),
+      car: { id: 'car' } as ICarDTO,
+      user: { id: 'user' } as IUserDTO,
+    } as IRentalDTO;
+    await expect(createRentalUseCase.execute(rental)).rejects.toEqual(
+      new AppError(
+        'Return car date should have more than 24 hours from start rental date',
+      ),
+    );
   });
 });

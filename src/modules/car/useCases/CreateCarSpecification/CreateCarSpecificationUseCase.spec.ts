@@ -48,11 +48,11 @@ describe('Create car specification test suit', () => {
   });
 
   it('should be able to create a specification to a non-existent car', async () => {
-    await expect(async () => {
-      await createCarSpecificationUseCase.execute({
+    await expect(
+      createCarSpecificationUseCase.execute({
         id: 'invalid-id',
         specificationsIds: ['specification'],
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      }),
+    ).rejects.toEqual(new AppError('Car not found', 422));
   });
 });
