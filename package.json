@@ -12,7 +12,7 @@
     "start": "node src/shared/infra/http/server.js",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "seed:admin": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/admin.ts",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles"
   },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",

@@ -23,7 +23,7 @@ export class DevolutionRentalUseCase {
     private dateProvider: IDateProvider,
   ) {}
 
-  async execute({ rentalId, userId }: IRequest): Promise<IRentalDTO> {
+  async execute({ rentalId }: IRequest): Promise<IRentalDTO> {
     const currentDate = this.dateProvider.getCurrentDate();
     const minimumDaily = 1;
 
