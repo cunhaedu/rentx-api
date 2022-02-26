@@ -60,11 +60,11 @@ describe('create category controller test suit', () => {
         password: 'admin',
       });
 
-    const { token } = responseToken;
+    const { refreshToken } = responseToken;
 
     const { status, body } = await request(app)
       .post('/categories')
-      .set({ Authorization: `bearer ${token}` })
+      .set({ Authorization: `bearer ${refreshToken}` })
       .send({
         name: 'Category name sample',
         description: 'Category description sample',
@@ -82,11 +82,11 @@ describe('create category controller test suit', () => {
         password: 'admin',
       });
 
-    const { token } = responseToken;
+    const { refreshToken } = responseToken;
 
     await request(app)
       .post('/categories')
-      .set({ Authorization: `bearer ${token}` })
+      .set({ Authorization: `bearer ${refreshToken}` })
       .send({
         name: 'Category name sample',
         description: 'Category description sample',
@@ -94,7 +94,7 @@ describe('create category controller test suit', () => {
 
     const { status, body } = await request(app)
       .post('/categories')
-      .set({ Authorization: `bearer ${token}` })
+      .set({ Authorization: `bearer ${refreshToken}` })
       .send({
         name: 'Category name sample',
         description: 'Category description sample',

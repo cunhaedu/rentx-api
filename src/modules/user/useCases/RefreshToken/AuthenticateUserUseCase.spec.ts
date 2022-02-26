@@ -58,7 +58,6 @@ describe('Authenticate user test suit', () => {
     const authenticationData = await authenticateUserUseCase.execute(user);
 
     expect(authenticationData).toHaveProperty('token');
-    expect(authenticationData).toHaveProperty('refreshToken');
   });
 
   it('should not be able to authenticate a nonexistent user', async () => {

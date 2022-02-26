@@ -67,7 +67,7 @@ export class AuthenticateUserUseCase {
     });
 
     const refreshToken = await this.tokenManagerProvider.sign(
-      { user: { email: user.email } },
+      {},
       authConfig.REFRESH_TOKEN_SECRET,
       { subject: user.id, expiresIn: authConfig.REFRESH_TOKEN_EXPIRES_IN },
     );
