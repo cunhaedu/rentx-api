@@ -1,5 +1,6 @@
-import { IUserRepository } from '@modules/user/repositories/IUserRepository';
 import { getRepository, Repository } from 'typeorm';
+
+import { IUserRepository } from '@modules/user/repositories/IUserRepository';
 import { User } from '@modules/user/infra/typeorm/entities/User';
 
 export class UserRepository implements IUserRepository {
@@ -10,7 +11,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async save({ name, email, password, driverLicense }: User): Promise<User> {
-    const user = await this.repository.create({
+    const user = this.repository.create({
       name,
       email,
       password,

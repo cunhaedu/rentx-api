@@ -11,4 +11,5 @@ export interface IDateProvider {
   compare(startDate: Date, endDate: Date, unit: compareUnits): number;
   convertToUTC(date: Date): string | Date;
   getCurrentDate(): Date;
+  addDays(days: number): Date;
 }

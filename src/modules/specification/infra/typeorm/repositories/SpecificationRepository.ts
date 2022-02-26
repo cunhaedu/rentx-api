@@ -12,7 +12,7 @@ export class SpecificationRepository implements ISpecificationRepository {
   }
 
   async save({ name, description }: ISpecificationDTO): Promise<Specification> {
-    const specification = await this.repository.create({
+    const specification = this.repository.create({
       name,
       description,
     });

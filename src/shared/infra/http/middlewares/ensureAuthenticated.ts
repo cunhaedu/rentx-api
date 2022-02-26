@@ -1,8 +1,9 @@
+import { container } from 'tsyringe';
 import { Request, Response, NextFunction } from 'express';
-import { verify } from 'jsonwebtoken';
 
+import { UserTokenRepository } from '@modules/user/infra/typeorm/repositories/UserTokenRepository';
+import { ITokenManagerProvider } from '@shared/providers/TokenManagerProvider/ITokenManagerProvider';
 import auth from '@config/auth';
-import { UserRepository } from '@modules/user/infra/typeorm/repositories/UserRepository';
 
 interface IPayload {
   sub: string;
@@ -27,11 +28,21 @@ export const ensureAuthenticated = async (
   }
 
   try {
-    const { sub } = verify(token, authConfig.SECRET) as IPayload;
+    const tokenManagerProvider = container.resolve<ITokenManagerProvider>(
+      'TokenManagerProvider',
+    );
 
-    const userRepository = new UserRepository();
+    const { sub } = (await tokenManagerProvider.verify(
+      token,
+      authConfig.REFRESH_TOKEN_SECRET,
+    )) as IPayload;
 
-    const user = await userRepository.findById(sub);
+    const userTokenRepository = new UserTokenRepository();
+
+    const user = await userTokenRepository.findByUserAndRefreshToken(
+      sub,
+      token,
+    );
 
     if (!user) {
       return res.status(401).json({ error: 'User does not exists' });

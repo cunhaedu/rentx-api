@@ -2,9 +2,9 @@ import request from 'supertest';
 import { app } from '@shared/infra/http/app';
 import { Connection, getConnection } from 'typeorm';
 import { v4 } from 'uuid';
-import { hash } from 'bcrypt';
 
 import createConnection from '@shared/infra/typeorm/index';
+import { BcryptEncoderProvider } from '@shared/providers/EncoderProvider/implementations/BcryptEncoderProvider';
 
 let connection: Connection;
 
@@ -14,11 +14,13 @@ describe('create category controller test suit', () => {
 
     await connection.runMigrations();
 
+    const encoderProvider = new BcryptEncoderProvider();
+
     const user = {
       id: v4(),
       name: 'admin',
       email: 'admin@rentx.com',
-      password: await hash('admin', 10),
+      password: await encoderProvider.encode('admin'),
       isAdmin: true,
       driverLicense: '123456',
     };
@@ -58,11 +60,11 @@ describe('create category controller test suit', () => {
         password: 'admin',
       });
 
-    const { token } = responseToken;
+    const { refreshToken } = responseToken;
 
     const { status, body } = await request(app)
       .post('/categories')
-      .set({ Authorization: `bearer ${token}` })
+      .set({ Authorization: `bearer ${refreshToken}` })
       .send({
         name: 'Category name sample',
         description: 'Category description sample',
@@ -80,11 +82,11 @@ describe('create category controller test suit', () => {
         password: 'admin',
       });
 
-    const { token } = responseToken;
+    const { refreshToken } = responseToken;
 
     await request(app)
       .post('/categories')
-      .set({ Authorization: `bearer ${token}` })
+      .set({ Authorization: `bearer ${refreshToken}` })
       .send({
         name: 'Category name sample',
         description: 'Category description sample',
@@ -92,7 +94,7 @@ describe('create category controller test suit', () => {
 
     const { status, body } = await request(app)
       .post('/categories')
-      .set({ Authorization: `bearer ${token}` })
+      .set({ Authorization: `bearer ${refreshToken}` })
       .send({
         name: 'Category name sample',
         description: 'Category description sample',

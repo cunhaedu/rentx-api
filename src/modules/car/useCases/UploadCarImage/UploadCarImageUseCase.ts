@@ -27,8 +27,8 @@ export class UploadCarImageUseCase {
       throw new AppError('Car not found!', 422);
     }
 
-    images.map(async name =>
-      this.carImageRepository.save({ name, car: { id } as ICarDTO }),
-    );
+    images.forEach(name => {
+      this.carImageRepository.save({ name, car: { id } as ICarDTO });
+    });
   }
 }
