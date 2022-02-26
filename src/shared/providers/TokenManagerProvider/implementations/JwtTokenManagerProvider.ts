@@ -16,11 +16,15 @@ export class JwtTokenManagerProvider implements ITokenManagerProvider {
   ): Promise<string> {
     return jwt.sign(info, secret, {
       expiresIn: options?.expiresIn ?? '1d',
-      subject: options?.subject,
+      subject: options?.subject || undefined,
     });
   }
 
   async verify(token: string, secret: string): Promise<IPayload | Error> {
-    return jwt.verify(token, secret);
+    try {
+      return jwt.verify(token, secret);
+    } catch (error) {
+      throw new Error('Invalid jwt token');
+    }
   }
 }

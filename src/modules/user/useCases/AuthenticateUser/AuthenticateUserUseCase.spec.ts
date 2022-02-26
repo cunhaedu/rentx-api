@@ -8,8 +8,8 @@ import { IDateProvider } from '@shared/providers/date/IDateProvider';
 import { IEncoderProvider } from '@shared/providers/EncoderProvider/IEncoderProvider';
 import { ITokenManagerProvider } from '@shared/providers/TokenManagerProvider/ITokenManagerProvider';
 import { DayJsDateProvider } from '@shared/providers/date/implementations/DayJsDateProvider';
-import { FakeEncoderProvider } from '@shared/providers/EncoderProvider/implementations/FakeEncoderProvider';
-import { FakeTokenManagerProvider } from '@shared/providers/TokenManagerProvider/implementations/FakeTokenManagerProvider';
+import { FakeEncoderProvider } from '@shared/providers/EncoderProvider/fakes/FakeEncoderProvider';
+import { FakeTokenManagerProvider } from '@shared/providers/TokenManagerProvider/fakes/FakeTokenManagerProvider';
 
 import AppError from '@shared/errors/AppError';
 
