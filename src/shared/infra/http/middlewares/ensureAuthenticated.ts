@@ -1,8 +1,9 @@
+import { container } from 'tsyringe';
 import { Request, Response, NextFunction } from 'express';
-import { verify } from 'jsonwebtoken';
 
-import auth from '@config/auth';
 import { UserRepository } from '@modules/user/infra/typeorm/repositories/UserRepository';
+import { ITokenManagerProvider } from '@shared/providers/TokenManagerProvider/ITokenManagerProvider';
+import auth from '@config/auth';
 
 interface IPayload {
   sub: string;
@@ -27,7 +28,14 @@ export const ensureAuthenticated = async (
   }
 
   try {
-    const { sub } = verify(token, authConfig.SECRET) as IPayload;
+    const tokenManagerProvider = container.resolve<ITokenManagerProvider>(
+      'TokenManagerProvider',
+    );
+
+    const { sub } = (await tokenManagerProvider.verify(
+      token,
+      authConfig.SECRET,
+    )) as IPayload;
 
     const userRepository = new UserRepository();
 

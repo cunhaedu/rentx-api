@@ -29,7 +29,7 @@ export class CarRepository implements ICarRepository {
     name,
     category,
   }: IFindAvailableCarsOptions): Promise<ICarDTO[]> {
-    const query = await this.repository
+    const query = this.repository
       .createQueryBuilder('car')
       .innerJoinAndSelect('car.category', 'category')
       .where('car.available = :available', { available: true });
