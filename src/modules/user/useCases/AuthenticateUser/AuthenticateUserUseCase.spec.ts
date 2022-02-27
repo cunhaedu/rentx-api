@@ -4,10 +4,10 @@ import { CreateUserUseCase } from '@modules/user/useCases/CreateUser/CreateUserU
 import { InMemoryUserTokenRepository } from '@modules/user/repositories/in-memory/InMemoryUserTokenRepository';
 import { IUserDTO } from '@modules/user/dtos/IUserDTO';
 
-import { IDateProvider } from '@shared/providers/date/IDateProvider';
+import { IDateProvider } from '@shared/providers/DateProvider/IDateProvider';
 import { IEncoderProvider } from '@shared/providers/EncoderProvider/IEncoderProvider';
 import { ITokenManagerProvider } from '@shared/providers/TokenManagerProvider/ITokenManagerProvider';
-import { DayJsDateProvider } from '@shared/providers/date/implementations/DayJsDateProvider';
+import { DayJsDateProvider } from '@shared/providers/DateProvider/implementations/DayJsDateProvider';
 import { FakeEncoderProvider } from '@shared/providers/EncoderProvider/fakes/FakeEncoderProvider';
 import { FakeTokenManagerProvider } from '@shared/providers/TokenManagerProvider/fakes/FakeTokenManagerProvider';
 

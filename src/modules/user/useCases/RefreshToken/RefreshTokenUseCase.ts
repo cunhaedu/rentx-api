@@ -5,7 +5,7 @@ import { ITokenManagerProvider } from '@shared/providers/TokenManagerProvider/IT
 
 import AppError from '@shared/errors/AppError';
 import auth from '@config/auth';
-import { IDateProvider } from '@shared/providers/date/IDateProvider';
+import { IDateProvider } from '@shared/providers/DateProvider/IDateProvider';
 import { IUserDTO } from '@modules/user/dtos/IUserDTO';
 
 interface ITokenPayload {
@@ -52,8 +52,9 @@ export class RefreshTokenUseCase {
     );
 
     await this.userTokenRepository.save({
-      expiresDate: this.dateProvider.addDays(
+      expiresDate: this.dateProvider.add(
         authConfig.REFRESH_TOKEN_EXPIRES_DAYS,
+        'days',
       ),
       refreshToken,
       user: <IUserDTO>{ id: userId },

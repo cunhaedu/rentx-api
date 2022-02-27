@@ -1,15 +1,16 @@
-export type compareUnits =
+export type unitTypes =
   | 'milliseconds'
   | 'seconds'
   | 'minutes'
   | 'hours'
   | 'days'
+  | 'weeks'
   | 'months'
   | 'years';
 
 export interface IDateProvider {
-  compare(startDate: Date, endDate: Date, unit: compareUnits): number;
+  compare(startDate: Date, endDate: Date, unit: unitTypes): number;
   convertToUTC(date: Date): string | Date;
   getCurrentDate(): Date;
-  addDays(days: number): Date;
+  add(value: number, unit: unitTypes): Date;
 }
