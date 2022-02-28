@@ -12,6 +12,11 @@ interface ITokenPayload {
   sub: string;
 }
 
+interface IRefreshTokenResponse {
+  token: string;
+  refreshToken: string;
+}
+
 @injectable()
 export class RefreshTokenUseCase {
   constructor(
@@ -25,7 +30,7 @@ export class RefreshTokenUseCase {
     private dateProvider: IDateProvider,
   ) {}
 
-  async execute(token: string): Promise<string> {
+  async execute(token: string): Promise<IRefreshTokenResponse> {
     const authConfig = auth();
     const { sub: userId } = <ITokenPayload>(
       await this.tokenManagerProvider.verify(
@@ -60,6 +65,15 @@ export class RefreshTokenUseCase {
       user: <IUserDTO>{ id: userId },
     });
 
-    return refreshToken;
+    const newToken = await this.tokenManagerProvider.sign(
+      {},
+      authConfig.SECRET,
+      {
+        subject: userId,
+        expiresIn: authConfig.EXPIRES_IN,
+      },
+    );
+
+    return { refreshToken, token: newToken };
   }
 }

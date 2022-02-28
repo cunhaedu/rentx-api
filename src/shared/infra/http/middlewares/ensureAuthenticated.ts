@@ -1,7 +1,6 @@
 import { container } from 'tsyringe';
 import { Request, Response, NextFunction } from 'express';
 
-import { UserTokenRepository } from '@modules/user/infra/typeorm/repositories/UserTokenRepository';
 import { ITokenManagerProvider } from '@shared/providers/TokenManagerProvider/ITokenManagerProvider';
 import auth from '@config/auth';
 
@@ -34,19 +33,8 @@ export const ensureAuthenticated = async (
 
     const { sub } = (await tokenManagerProvider.verify(
       token,
-      authConfig.REFRESH_TOKEN_SECRET,
+      authConfig.SECRET,
     )) as IPayload;
-
-    const userTokenRepository = new UserTokenRepository();
-
-    const user = await userTokenRepository.findByUserAndRefreshToken(
-      sub,
-      token,
-    );
-
-    if (!user) {
-      return res.status(401).json({ error: 'User does not exists' });
-    }
 
     req.token = {
       sub: {

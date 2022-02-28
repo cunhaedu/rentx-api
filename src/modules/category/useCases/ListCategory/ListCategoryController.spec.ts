@@ -54,11 +54,11 @@ describe('List category controller test suit', () => {
         password: 'admin',
       });
 
-    const { refreshToken } = responseToken;
+    const { token } = responseToken;
 
     await request(app)
       .post('/categories')
-      .set({ Authorization: `bearer ${refreshToken}` })
+      .set({ Authorization: `bearer ${token}` })
       .send({
         name: 'Category name sample',
         description: 'Category description sample',
@@ -66,7 +66,7 @@ describe('List category controller test suit', () => {
 
     const { status, body } = await request(app)
       .get('/categories')
-      .set({ Authorization: `bearer ${refreshToken}` });
+      .set({ Authorization: `bearer ${token}` });
 
     expect(status).toBe(200);
     expect(body).toHaveLength(1);

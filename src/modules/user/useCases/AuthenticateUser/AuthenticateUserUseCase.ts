@@ -6,7 +6,6 @@ import { IUserTokenRepository } from '@modules/user/repositories/IUserTokenRepos
 import { IDateProvider } from '@shared/providers/DateProvider/IDateProvider';
 import { IEncoderProvider } from '@shared/providers/EncoderProvider/IEncoderProvider';
 import { ITokenManagerProvider } from '@shared/providers/TokenManagerProvider/ITokenManagerProvider';
-
 import AppError from '@shared/errors/AppError';
 import auth from '@config/auth';
 
