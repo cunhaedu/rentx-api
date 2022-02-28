@@ -43,6 +43,13 @@ export class UserTokenRepository implements IUserTokenRepository {
     return this.repository.findOne({ user: { id: user }, refreshToken });
   }
 
+  findByToken(token: string): Promise<UserToken | undefined> {
+    return this.repository.findOne({
+      relations: ['user'],
+      where: { refreshToken: token },
+    });
+  }
+
   async update(id: string, data: UserToken): Promise<void> {
     await this.repository.update(id, data);
   }

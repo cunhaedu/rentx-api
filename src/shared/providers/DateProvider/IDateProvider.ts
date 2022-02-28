@@ -10,6 +10,7 @@ export type unitTypes =
 
 export interface IDateProvider {
   compare(startDate: Date, endDate: Date, unit: unitTypes): number;
+  compareIfBefore(startDate: Date, endDate: Date): boolean;
   convertToUTC(date: Date): string | Date;
   getCurrentDate(): Date;
   add(value: number, unit: unitTypes): Date;

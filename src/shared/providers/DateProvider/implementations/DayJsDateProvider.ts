@@ -19,6 +19,10 @@ export class DayJsDateProvider implements IDateProvider {
     return dayjs(endDateUTC).diff(startDateUTC, unit);
   }
 
+  compareIfBefore(startDate: Date, endDate: Date): boolean {
+    return dayjs(endDate).isBefore(startDate);
+  }
+
   convertToUTC(date: Date): string {
     return dayjs(date).utc().local().format();
   }
