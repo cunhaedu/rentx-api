@@ -9,6 +9,7 @@ export interface IUserTokenRepository {
     user: string,
     token: string,
   ): Promise<IUserTokenDTO | undefined>;
+  findByToken(token: string): Promise<IUserTokenDTO | undefined>;
   update(id: string, data: IUserTokenDTO): Promise<void>;
   softDelete(id: string): Promise<void>;
   delete(id: string): Promise<void>;

@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { IUserRepository } from '@modules/user/repositories/IUserRepository';
 import { IUserDTO } from '@modules/user/dtos/IUserDTO';
 import { IUserTokenRepository } from '@modules/user/repositories/IUserTokenRepository';
-import { IDateProvider } from '@shared/providers/date/IDateProvider';
+import { IDateProvider } from '@shared/providers/DateProvider/IDateProvider';
 import { IEncoderProvider } from '@shared/providers/EncoderProvider/IEncoderProvider';
 import { ITokenManagerProvider } from '@shared/providers/TokenManagerProvider/ITokenManagerProvider';
 
@@ -73,8 +73,9 @@ export class AuthenticateUserUseCase {
     );
 
     await this.userTokenRepository.save({
-      expiresDate: this.dateProvider.addDays(
+      expiresDate: this.dateProvider.add(
         authConfig.REFRESH_TOKEN_EXPIRES_DAYS,
+        'days',
       ),
       refreshToken,
       user,

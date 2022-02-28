@@ -2,7 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import { IRentalRepository } from '@modules/rental/repositories/IRentalRepository';
 import { IRentalDTO } from '@modules/rental/dtos/IRentalDTO';
-import { IDateProvider } from '@shared/providers/date/IDateProvider';
+import { IDateProvider } from '@shared/providers/DateProvider/IDateProvider';
 import { ICarRepository } from '@modules/car/repositories/ICarRepository';
 import AppError from '@shared/errors/AppError';
 import { ICarDTO } from '@modules/car/dtos/ICarDTO';

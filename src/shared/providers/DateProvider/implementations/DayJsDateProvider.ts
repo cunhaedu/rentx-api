@@ -3,9 +3,9 @@ import utc from 'dayjs/plugin/utc';
 import { injectable } from 'tsyringe';
 
 import {
-  compareUnits,
+  unitTypes,
   IDateProvider,
-} from '@shared/providers/date/IDateProvider';
+} from '@shared/providers/DateProvider/IDateProvider';
 
 @injectable()
 export class DayJsDateProvider implements IDateProvider {
@@ -13,10 +13,14 @@ export class DayJsDateProvider implements IDateProvider {
     dayjs.extend(utc);
   }
 
-  compare(startDate: Date, endDate: Date, unit: compareUnits): number {
+  compare(startDate: Date, endDate: Date, unit: unitTypes): number {
     const startDateUTC = this.convertToUTC(startDate);
     const endDateUTC = this.convertToUTC(endDate);
     return dayjs(endDateUTC).diff(startDateUTC, unit);
+  }
+
+  compareIfBefore(startDate: Date, endDate: Date): boolean {
+    return dayjs(endDate).isBefore(startDate);
   }
 
   convertToUTC(date: Date): string {
@@ -27,7 +31,7 @@ export class DayJsDateProvider implements IDateProvider {
     return dayjs().toDate();
   }
 
-  addDays(days: number): Date {
-    return dayjs().add(days, 'days').toDate();
+  add(value: number, unit: unitTypes): Date {
+    return dayjs().add(value, unit).toDate();
   }
 }

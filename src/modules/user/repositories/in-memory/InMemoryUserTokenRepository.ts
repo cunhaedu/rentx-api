@@ -46,6 +46,10 @@ export class InMemoryUserTokenRepository implements IUserTokenRepository {
     );
   }
 
+  async findByToken(token: string): Promise<IUserTokenDTO | undefined> {
+    return this.usersToken.find(userToken => userToken.refreshToken === token);
+  }
+
   async findById(id: string): Promise<UserToken | undefined> {
     return this.usersToken.find(userToken => userToken.id === id);
   }
