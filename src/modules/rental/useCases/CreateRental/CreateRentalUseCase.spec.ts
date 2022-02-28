@@ -11,12 +11,6 @@ import { IUserDTO } from '@modules/user/dtos/IUserDTO';
 import { IDateProvider } from '@shared/providers/DateProvider/IDateProvider';
 import { DayJsDateProvider } from '@shared/providers/DateProvider/implementations/DayJsDateProvider';
 
-import { IRentalDTO } from '@modules/rental/dtos/IRentalDTO';
-import { ICarDTO } from '@modules/car/dtos/ICarDTO';
-import { IUserDTO } from '@modules/user/dtos/IUserDTO';
-import { IDateProvider } from '@shared/providers/date/IDateProvider';
-import { DayJsDateProvider } from '@shared/providers/date/implementations/DayJsDateProvider';
-
 import AppError from '@shared/errors/AppError';
 
 let createRentalUseCase: CreateRentalUseCase;
@@ -53,7 +47,6 @@ describe('Create rental test suit', () => {
   });
 
   it('should not be able to create a new rental if there is another rental open to the same user', async () => {
-
     const rental = {
       expectedReturnDate: currentDateWithOneMoreDay,
       car: { id: 'car' } as ICarDTO,
