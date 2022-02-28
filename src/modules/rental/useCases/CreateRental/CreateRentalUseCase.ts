@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import { IRentalRepository } from '@modules/rental/repositories/IRentalRepository';
 import { IRentalDTO } from '@modules/rental/dtos/IRentalDTO';
+
 import { IDateProvider } from '@shared/providers/DateProvider/IDateProvider';
 import { ICarRepository } from '@modules/car/repositories/ICarRepository';
 import AppError from '@shared/errors/AppError';
@@ -12,8 +13,10 @@ export class CreateRentalUseCase {
   constructor(
     @inject('RentalRepository')
     private rentalRepository: IRentalRepository,
+
     @inject('CarRepository')
     private carRepository: ICarRepository,
+
     @inject('DateProvider')
     private dateProvider: IDateProvider,
   ) {}

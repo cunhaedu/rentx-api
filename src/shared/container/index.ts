@@ -12,6 +12,7 @@ import { CarImageRepository } from '@modules/car/infra/typeorm/repositories/CarI
 import { ICarImageRepository } from '@modules/car/repositories/ICarImageRepository';
 import { IRentalRepository } from '@modules/rental/repositories/IRentalRepository';
 import { RentalRepository } from '@modules/rental/infra/typeorm/repositories/RentalRepository';
+
 import { IDateProvider } from '@shared/providers/DateProvider/IDateProvider';
 import { DayJsDateProvider } from '@shared/providers/DateProvider/implementations/DayJsDateProvider';
 import { UserTokenRepository } from '@modules/user/infra/typeorm/repositories/UserTokenRepository';

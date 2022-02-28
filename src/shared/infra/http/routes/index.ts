@@ -8,6 +8,7 @@ import { carRoutes } from '@shared/infra/http/routes/car.routes';
 import { rentalRoutes } from '@shared/infra/http/routes/rental.routes';
 import { passwordRoutes } from '@shared/infra/http/routes/password.routes';
 
+
 const routes = Router();
 
 routes.use('/authenticate', authenticateRoutes);
