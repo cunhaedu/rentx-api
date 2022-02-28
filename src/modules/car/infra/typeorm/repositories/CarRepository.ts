@@ -29,7 +29,7 @@ export class CarRepository implements ICarRepository {
     name,
     category,
   }: IFindAvailableCarsOptions): Promise<ICarDTO[]> {
-    const query = await this.repository
+    const query = this.repository
       .createQueryBuilder('car')
       .innerJoinAndSelect('car.category', 'category')
       .where('car.available = :available', { available: true });
@@ -50,5 +50,9 @@ export class CarRepository implements ICarRepository {
   async save(data: Car): Promise<Car> {
     const car = this.repository.create(data);
     return this.repository.save(car);
+  }
+
+  async update(id: string, data: Car): Promise<void> {
+    await this.repository.update(id, data);
   }
 }

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires,@typescript-eslint/ban-ts-comment */
 
-const fs = require('fs');
-const path = require('path');
+// const fs = require('fs');
+// const path = require('path');
 const dotEnvSafe = require('dotenv-safe');
 
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -14,16 +14,16 @@ dotEnvSafe.config({
   allowEmptyValues: true,
 });
 
-const blockList = ['.git'];
-const directory = 'dist';
-fs.readdirSync(directory).forEach((file: any) => {
-  if (blockList.includes(file)) return;
-  if (fs.statSync(path.join(directory, file)).isFile()) {
-    fs.unlinkSync(path.join(directory, file));
-  } else {
-    fs.rmSync(path.join(directory, file), { recursive: true });
-  }
-});
+// const blockList = ['.git'];
+// const directory = 'dist';
+// fs.readdirSync(directory).forEach((file: any) => {
+//   if (blockList.includes(file)) return;
+//   if (fs.statSync(path.join(directory, file)).isFile()) {
+//     fs.unlinkSync(path.join(directory, file));
+//   } else {
+//     fs.rmSync(path.join(directory, file), { recursive: true });
+//   }
+// });
 
 module.exports = {
   // All imported modules in your tests should be mocked automatically
@@ -36,15 +36,15 @@ module.exports = {
   // cacheDirectory: "/tmp/jest_rs",
 
   // Automatically clear mock calls and instances between every test
-  // clearMocks: false,
+  clearMocks: true,
 
   // Indicates whether the coverage information should be collected while executing the test
-  // collectCoverage: true,
+  collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  // collectCoverageFrom: ['<rootDir>/**/*.ts'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
   // The directory where Jest should output its coverage files
-  // coverageDirectory: 'coverage',
+  coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
@@ -52,7 +52,7 @@ module.exports = {
   // ],
 
   // A list of reporter names that Jest uses when writing coverage reports
-  // coverageReporters: ['text-summary', 'lcov'],
+  coverageReporters: ['text-summary', 'lcov'],
 
   // An object that configures minimum threshold enforcement for coverage results
   // coverageThreshold: undefined,

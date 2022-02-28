@@ -1,19 +1,47 @@
 import { InMemoryUserRepository } from '@modules/user/repositories/in-memory/InMemoryUserRepository';
 import { AuthenticateUserUseCase } from '@modules/user/useCases/AuthenticateUser/AuthenticateUserUseCase';
-import { IUserDTO } from '@modules/user/dtos/IUserDTO';
 import { CreateUserUseCase } from '@modules/user/useCases/CreateUser/CreateUserUseCase';
+import { InMemoryUserTokenRepository } from '@modules/user/repositories/in-memory/InMemoryUserTokenRepository';
+import { IUserDTO } from '@modules/user/dtos/IUserDTO';
+
+import { IDateProvider } from '@shared/providers/DateProvider/IDateProvider';
+import { IEncoderProvider } from '@shared/providers/EncoderProvider/IEncoderProvider';
+import { ITokenManagerProvider } from '@shared/providers/TokenManagerProvider/ITokenManagerProvider';
+import { DayJsDateProvider } from '@shared/providers/DateProvider/implementations/DayJsDateProvider';
+import { FakeEncoderProvider } from '@shared/providers/EncoderProvider/fakes/FakeEncoderProvider';
+import { FakeTokenManagerProvider } from '@shared/providers/TokenManagerProvider/fakes/FakeTokenManagerProvider';
+
 import AppError from '@shared/errors/AppError';
 
 let inMemoryUserRepository: InMemoryUserRepository;
+let inMemoryUserTokenRepository: InMemoryUserTokenRepository;
+
 let createUserUseCase: CreateUserUseCase;
 let authenticateUserUseCase: AuthenticateUserUseCase;
+
+let dateProvider: IDateProvider;
+let encoderProvider: IEncoderProvider;
+let tokenManagerProvider: ITokenManagerProvider;
 
 describe('Authenticate user test suit', () => {
   beforeAll(() => {
     inMemoryUserRepository = new InMemoryUserRepository();
-    createUserUseCase = new CreateUserUseCase(inMemoryUserRepository);
+    inMemoryUserTokenRepository = new InMemoryUserTokenRepository();
+
+    dateProvider = new DayJsDateProvider();
+    encoderProvider = new FakeEncoderProvider();
+    tokenManagerProvider = new FakeTokenManagerProvider();
+
+    createUserUseCase = new CreateUserUseCase(
+      inMemoryUserRepository,
+      encoderProvider,
+    );
     authenticateUserUseCase = new AuthenticateUserUseCase(
       inMemoryUserRepository,
+      inMemoryUserTokenRepository,
+      dateProvider,
+      encoderProvider,
+      tokenManagerProvider,
     );
   });
 
@@ -30,27 +58,24 @@ describe('Authenticate user test suit', () => {
     const authenticationData = await authenticateUserUseCase.execute(user);
 
     expect(authenticationData).toHaveProperty('token');
+    expect(authenticationData).toHaveProperty('refreshToken');
   });
 
   it('should not be able to authenticate a nonexistent user', async () => {
-    await expect(async () => {
-      const authenticationData = await authenticateUserUseCase.execute({
+    await expect(
+      authenticateUserUseCase.execute({
         email: 'invalid@test.com',
         password: '12345678',
-      });
-
-      expect(authenticationData).toHaveProperty('token');
-    }).rejects.toBeInstanceOf(AppError);
+      }),
+    ).rejects.toEqual(new AppError('Email or password incorrect', 422));
   });
 
   it('should not be able to authenticate a user with invalid password', async () => {
-    await expect(async () => {
-      const authenticationData = await authenticateUserUseCase.execute({
+    await expect(
+      authenticateUserUseCase.execute({
         email: 'user@test.com',
         password: 'wrong password',
-      });
-
-      expect(authenticationData).toHaveProperty('token');
-    }).rejects.toBeInstanceOf(AppError);
+      }),
+    ).rejects.toEqual(new AppError('Email or password incorrect', 422));
   });
 });

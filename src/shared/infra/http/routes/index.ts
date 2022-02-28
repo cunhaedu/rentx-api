@@ -6,10 +6,13 @@ import { specificationRoutes } from '@shared/infra/http/routes/specification.rou
 import { authenticateRoutes } from '@shared/infra/http/routes/authenticate.routes';
 import { carRoutes } from '@shared/infra/http/routes/car.routes';
 import { rentalRoutes } from '@shared/infra/http/routes/rental.routes';
+import { passwordRoutes } from '@shared/infra/http/routes/password.routes';
+
 
 const routes = Router();
 
 routes.use('/authenticate', authenticateRoutes);
+routes.use('/password', passwordRoutes);
 routes.use('/categories', categoryRoutes);
 routes.use('/specifications', specificationRoutes);
 routes.use('/users', userRoutes);

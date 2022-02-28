@@ -38,4 +38,8 @@ export class InMemoryRentalRepository implements IRentalRepository {
   async findOpenRentalByCar(id: string): Promise<IRentalDTO | undefined> {
     return this.rentals.find(rental => rental.car.id === id && !rental.endDate);
   }
+
+  async listByUser(user: string): Promise<IRentalDTO[]> {
+    return this.rentals.filter(rental => rental.user.id === user);
+  }
 }

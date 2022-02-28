@@ -44,13 +44,13 @@ export class InMemoryUserRepository implements IUserRepository {
   }
 
   async softDelete(id: string): Promise<void> {
-    this.users = this.users.map(category => ({
-      ...category,
-      deletedAt: category.id === id ? new Date() : category.deletedAt,
+    this.users = this.users.map(user => ({
+      ...user,
+      deletedAt: user.id === id ? new Date() : user.deletedAt,
     }));
   }
 
   async delete(id: string): Promise<void> {
-    this.users = this.users.filter(category => category.id !== id);
+    this.users = this.users.filter(user => user.id !== id);
   }
 }

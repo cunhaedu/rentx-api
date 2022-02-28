@@ -2,14 +2,21 @@ import { inject, injectable } from 'tsyringe';
 
 import { IRentalRepository } from '@modules/rental/repositories/IRentalRepository';
 import { IRentalDTO } from '@modules/rental/dtos/IRentalDTO';
-import { IDateProvider } from '@shared/providers/date/IDateProvider';
+
+import { IDateProvider } from '@shared/providers/DateProvider/IDateProvider';
+import { ICarRepository } from '@modules/car/repositories/ICarRepository';
 import AppError from '@shared/errors/AppError';
+import { ICarDTO } from '@modules/car/dtos/ICarDTO';
 
 @injectable()
 export class CreateRentalUseCase {
   constructor(
     @inject('RentalRepository')
     private rentalRepository: IRentalRepository,
+
+    @inject('CarRepository')
+    private carRepository: ICarRepository,
+
     @inject('DateProvider')
     private dateProvider: IDateProvider,
   ) {}
@@ -32,6 +39,10 @@ export class CreateRentalUseCase {
     }
 
     this.validateRentalHours(data.expectedReturnDate);
+
+    await this.carRepository.update(<string>data.car.id, {
+      available: false,
+    } as ICarDTO);
 
     return this.rentalRepository.save(data);
   }

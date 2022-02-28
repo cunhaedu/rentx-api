@@ -34,4 +34,11 @@ export class RentalRepository implements IRentalRepository {
     const rental = this.repository.create(data);
     return this.repository.save(rental);
   }
+
+  async listByUser(user: string): Promise<Rental[]> {
+    return this.repository.find({
+      relations: ['car'],
+      where: { user: { id: user } },
+    });
+  }
 }

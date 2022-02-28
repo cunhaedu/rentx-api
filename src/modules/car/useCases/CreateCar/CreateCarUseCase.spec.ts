@@ -45,31 +45,31 @@ describe('Create car test suit', () => {
   });
 
   it('should not be able to create a car with an existent license plate', async () => {
-    await expect(async () => {
-      const car: ICarDTO = {
-        name: 'Hilux',
-        description: 'Hilux CD SR5 4x4 2.8 Diesel',
-        brand: 'Toyota',
-        dailyRate: 100,
-        licensePlate: 'ABC-1234',
-        fineAmount: 60,
-        category: { id: 'category' } as ICategoryDTO,
-      };
+    const car: ICarDTO = {
+      name: 'Hilux',
+      description: 'Hilux CD SR5 4x4 2.8 Diesel',
+      brand: 'Toyota',
+      dailyRate: 100,
+      licensePlate: 'ABC-1234',
+      fineAmount: 60,
+      category: { id: 'category' } as ICategoryDTO,
+    };
 
-      await createCarUseCase.execute(car);
+    await createCarUseCase.execute(car);
 
-      const car2: ICarDTO = {
-        name: 'Hilux',
-        description: 'Hilux CD SR5 4x4 2.8 Diesel',
-        brand: 'Toyota',
-        dailyRate: 100,
-        licensePlate: 'ABC-1234',
-        fineAmount: 60,
-        category: { id: 'category' } as ICategoryDTO,
-      };
+    const car2: ICarDTO = {
+      name: 'Hilux',
+      description: 'Hilux CD SR5 4x4 2.8 Diesel',
+      brand: 'Toyota',
+      dailyRate: 100,
+      licensePlate: 'ABC-1234',
+      fineAmount: 60,
+      category: { id: 'category' } as ICategoryDTO,
+    };
 
-      await createCarUseCase.execute(car2);
-    }).rejects.toBeInstanceOf(AppError);
+    await expect(createCarUseCase.execute(car2)).rejects.toEqual(
+      new AppError('License plate already exists', 422),
+    );
   });
 
   it('should create a car with available true by default', async () => {

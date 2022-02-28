@@ -1,8 +1,8 @@
+import { container } from 'tsyringe';
 import { Request, Response, NextFunction } from 'express';
-import { verify } from 'jsonwebtoken';
 
+import { ITokenManagerProvider } from '@shared/providers/TokenManagerProvider/ITokenManagerProvider';
 import auth from '@config/auth';
-import { UserRepository } from '@modules/user/infra/typeorm/repositories/UserRepository';
 
 interface IPayload {
   sub: string;
@@ -27,15 +27,14 @@ export const ensureAuthenticated = async (
   }
 
   try {
-    const { sub } = verify(token, authConfig.SECRET) as IPayload;
+    const tokenManagerProvider = container.resolve<ITokenManagerProvider>(
+      'TokenManagerProvider',
+    );
 
-    const userRepository = new UserRepository();
-
-    const user = await userRepository.findById(sub);
-
-    if (!user) {
-      return res.status(401).json({ error: 'User does not exists' });
-    }
+    const { sub } = (await tokenManagerProvider.verify(
+      token,
+      authConfig.SECRET,
+    )) as IPayload;
 
     req.token = {
       sub: {
